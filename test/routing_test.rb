@@ -2,7 +2,13 @@
 require File.expand_path('../test_helper', __FILE__)
 
 class PeopleController < ActionController::Base;  end
-class ProductsController < ActionController::Base;  end
+class ProductsController < ActionController::Base
+
+  def index
+    render text: "products"
+  end
+
+end
 
 class TranslateRoutesTest < ActionController::TestCase
 
@@ -578,5 +584,9 @@ class ProductsControllerTest < ActionController::TestCase
         raise e if e.is_a?(NameError) #swallow anything that isn't a NameError
       end
     end
+  end
+
+  def test_tests_can_find_routes_with_format
+    get :index, locale: :es, format: :json
   end
 end
